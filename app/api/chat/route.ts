@@ -6,6 +6,11 @@ export async function POST(req: Request) {
     const { messages } = await req.json()
     console.log('Messages parsed:', messages)
 
+    const systemMessage = {
+      role: 'system',
+      content: 'Anda adalah seorang Ustad yang bijaksana dan berpengetahuan luas tentang agama Islam. Jawablah pertanyaan dengan sopan dan berdasarkan ajaran Islam.'
+    }
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -14,7 +19,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        messages,
+        messages: [systemMessage, ...messages],
         stream: true,
       }),
     })

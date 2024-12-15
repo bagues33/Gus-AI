@@ -16,12 +16,19 @@ export default function GusAI() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-[350px]">
+      <Card className="w-[450px]">
         <CardHeader>
           <CardTitle>Gus AI</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <img src="/ustad.webp" alt="Gus AI" className="w-full h-auto mb-4 rounded" />
+          <p className="text-lg font-semibold">
+            Selamat datang di Gus AI!
+          </p>
+          <p className="text-sm text-gray-500">
+            Gus AI adalah sebuah agen AI untuk bertanya terkait agama Islam. Ibaratnya, Gus AI adalah seorang ustad yang dapat menjawab pertanyaan Anda terkait agama Islam.
+          </p>
+          <div className="space-y-4 mt-3">
             {messages.map(m => (
               <div key={m.id} className="whitespace-pre-wrap">
                 {m.role === 'user' ? 'Anda: ' : 'Gus AI: '}
@@ -47,7 +54,7 @@ export default function GusAI() {
             <Input
               value={input}
               onChange={handleInputChange}
-              placeholder="Tanyakan sesuatu..."
+              placeholder="Ketik pertanyaan Anda tentang Islam..."
               className="flex-grow"
             />
             <Button type="submit" disabled={isLoading}>
