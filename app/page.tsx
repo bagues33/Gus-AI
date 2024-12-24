@@ -29,8 +29,8 @@ export default function GusAI() {
             Gus AI adalah sebuah agen AI untuk bertanya terkait agama Islam. Ibaratnya, Gus AI adalah seorang ustad yang dapat menjawab pertanyaan Anda terkait agama Islam.
           </p>
           <div className="space-y-4 mt-3">
-            {messages.map(m => (
-              <div key={m.id} className="whitespace-pre-wrap">
+          {messages.map(m => (
+              <div key={m.id} className={`whitespace-pre-wrap p-2 rounded-lg ${m.role === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-300 text-black self-start'}`}>
                 {m.role === 'user' ? 'Anda: ' : 'Gus AI: '}
                 {m.content}
               </div>
