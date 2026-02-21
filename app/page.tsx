@@ -1,6 +1,8 @@
-'use client'
+"use client"
 
 import { useChat } from 'ai/react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -30,9 +32,13 @@ export default function GusAI() {
           </p>
           <div className="space-y-4 mt-3">
           {messages.map(m => (
-              <div key={m.id} className={`whitespace-pre-wrap p-2 rounded-lg ${m.role === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-300 text-black self-start'}`}>
-                {m.role === 'user' ? 'Anda: ' : 'Gus AI: '}
-                {m.content}
+              <div key={m.id} className={`prose whitespace-pre-wrap p-2 rounded-lg ${m.role === 'user' ? 'bg-blue-500 text-white self-end' : 'bg-gray-50 text-black self-start'}`}>
+                <div className="text-sm text-gray-600 mb-1">{m.role === 'user' ? 'Anda' : 'Gus AI'}</div>
+                <div className="markdown-content">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {String(m.content ?? '')}
+                  </ReactMarkdown>
+                </div>
               </div>
             ))}
             {isLoading && (
@@ -71,7 +77,7 @@ export default function GusAI() {
         </CardFooter>
       </Card>
       <footer className="mt-4 text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Gus AI. All rights reserved. Created by <a href="https://github.com/bagues33" target="_blank" rel="noopener noreferrer" className="underline">Tofan Bagus Apriyanto</a> / 23230027
+        &copy; {new Date().getFullYear()} Gus AI. All rights reserved. Created by <a href="https://github.com/bagues33" target="_blank" rel="noopener noreferrer" className="underline">Tofan Bagus Apriyanto</a>
       </footer>
     </div>
   )
